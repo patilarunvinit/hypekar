@@ -10,6 +10,6 @@ urlpatterns=[
     path('carbrand/',views.carbrand),
     path('carmodel',views.carmodel),
     path('carform/',views.CarForm),
-    path('test/',views.test),
+    path('mycardata/',views.mycardata),
 
 ]

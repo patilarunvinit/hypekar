@@ -163,7 +163,7 @@ def CarForm(request):
 
 
 @csrf_exempt
-def test(request):
+def mycardata(request):
     if request.method =='GET':
         email = request.session.get('email')
         data=mycar.objects.filter(email=email)
