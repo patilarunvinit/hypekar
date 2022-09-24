@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'app',
+    'registration',
+    'authentication',
+    'cardata',
+    'contact',
+    'mycar',
+    'feedback',
+
 
 ]
 
@@ -84,7 +90,7 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "hypekar",
+        'NAME': "hypekar1",
         "HOST": 'localhost',
         "PORT": 3306,
         "USER": 'root',
