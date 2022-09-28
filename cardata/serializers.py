@@ -5,11 +5,13 @@ from rest_framework import serializers
 class carsserializer(serializers.Serializer):
     brand = serializers.CharField(max_length=60)
     model_name = serializers.CharField(max_length=60)
-
+    basic =serializers.IntegerField()
+    standard = serializers.IntegerField()
+    premium =serializers.IntegerField()
 
     class Meta:
         model = cars
-        fields = ("brand","model_name")
+        fields = ("brand","model_name","basic","standard","premium")
 
     def create(self, validated_data):
         return cars.objects.create(**validated_data)

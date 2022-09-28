@@ -22,13 +22,7 @@ def feedbackform(request):
             return JsonResponse(outdata.errors, safe=False)
 
     elif request.method == 'GET':
-        email = request.session.get('email')
-        data = FeedBack.objects.filter(email=email)
+        data = FeedBack.objects.all()
         output = FeedBackserializer(data, many=True)
-        try:
-            data[0]
-            return JsonResponse(output.data, safe=False)
+        return JsonResponse(output.data, safe=False)
 
-        except:
-
-            return JsonResponse({"massage": "login 1st"}, safe=False)

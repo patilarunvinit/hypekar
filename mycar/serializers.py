@@ -19,3 +19,19 @@ class mycarserializer(serializers.Serializer):
 
     def create(self, validated_data):
         return mycar.objects.create(**validated_data)
+
+
+
+
+
+class mycarbrandserializer(serializers.Serializer):
+    brand = serializers.CharField(max_length=60)
+    model_Name = serializers.CharField(max_length=60)
+
+
+    class Meta:
+        model = mycar
+        fields = ("brand", "model_Name")
+
+    def create(self, validated_data):
+        return mycar.objects.create(**validated_data)

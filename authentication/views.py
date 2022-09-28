@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from mycar.serializers import mycarserializer
+from mycar.serializers import mycarserializer ,mycarbrandserializer
 from mycar.models import mycar
 
 
@@ -61,7 +61,7 @@ def slogin(request):
            login(request,user)
            request.session['email'] = user.email
            token, _ = Token.objects.get_or_create(user=user)
-           return JsonResponse({'token': token.key,'first_name':user.first_name,'last_name':user.last_name,'username':user.username,'email':user.email}, status=HTTP_200_OK)
+           return JsonResponse({'token': token.key,"massage":"logged in successfuly",'first_name':user.first_name,'last_name':user.last_name,'username':user.username,'email':user.email}, status=HTTP_200_OK)
 
 
 
@@ -82,6 +82,21 @@ def mycardata(request):
         email = request.session.get('email')
         data=mycar.objects.filter(email=email)
         output=mycarserializer(data, many=True)
+        try:
+            data[0]
+            return JsonResponse(output.data, safe=False)
+
+        except:
+
+            return JsonResponse({"massage": "login 1st"}, safe=False)
+
+
+@csrf_exempt
+def mycarbrand(request):
+    if request.method =='GET':
+        email = request.session.get('email')
+        data=mycar.objects.filter(email=email).values("brand","model_Name")
+        output=mycarbrandserializer(data, many=True)
         try:
             data[0]
             return JsonResponse(output.data, safe=False)

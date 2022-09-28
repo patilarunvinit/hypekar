@@ -13,3 +13,6 @@ class contanctserializer(serializers.Serializer):
     class Meta:
         model = contanctpage
         fields = ("firstName","lastName","type","mobileNumber")
+
+    def create(self, validated_data):
+        return contanctpage.objects.create(**validated_data)

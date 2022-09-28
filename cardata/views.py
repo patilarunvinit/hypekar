@@ -25,3 +25,12 @@ def carmodel(request):
         output = cars.objects.all().filter(brand=brand).values('model_name')
         outdata = cars3serializer(output, many=True)
         return JsonResponse(outdata.data, safe=False)
+
+
+
+@csrf_exempt
+def allcars(request):
+    if request.method =='GET':
+        output = cars.objects.all()
+        outdata = carsserializer(output, many=True)
+        return JsonResponse(outdata.data, safe=False)
