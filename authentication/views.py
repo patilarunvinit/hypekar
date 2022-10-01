@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from mycar.serializers import mycarserializer ,mycarbrandserializer
+from mycar.serializers import mycarserializer ,mycarbrandserializer,mycarmodelserializer
 from mycar.models import mycar
 
 
@@ -76,10 +76,11 @@ def slogout(request):
         return JsonResponse({"massage": "logout successfuly"}, safe=False)
 
 
+
 @csrf_exempt
 def mycardata(request):
     if request.method =='GET':
-        email = request.session.get('email')
+        email = request.GET['email']
         data=mycar.objects.filter(email=email)
         output=mycarserializer(data, many=True)
         try:
@@ -91,11 +92,14 @@ def mycardata(request):
             return JsonResponse({"massage": "login 1st"}, safe=False)
 
 
+
+
+
 @csrf_exempt
 def mycarbrand(request):
     if request.method =='GET':
-        email = request.session.get('email')
-        data=mycar.objects.filter(email=email).values("brand","model_Name")
+        email = request.GET['email']
+        data=mycar.objects.filter(email=email).values("brand").distinct()
         output=mycarbrandserializer(data, many=True)
         try:
             data[0]
@@ -104,3 +108,24 @@ def mycarbrand(request):
         except:
 
             return JsonResponse({"massage": "login 1st"}, safe=False)
+
+
+
+
+@csrf_exempt
+def mycarmodel(request):
+    if request.method =='GET':
+        brand = request.GET['brand']
+        email = request.GET['email']
+        data=mycar.objects.filter(email=email,brand=brand).values("model_Name")
+        output=mycarmodelserializer(data, many=True)
+        try:
+            data[0]
+            return JsonResponse(output.data, safe=False)
+
+        except:
+
+            return JsonResponse({"massage": "login 1st"}, safe=False)
+
+
+

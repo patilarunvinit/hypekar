@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'contact',
     'mycar',
     'feedback',
+    'booking',
 
 
 ]
