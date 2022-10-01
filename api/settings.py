@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'booking',
     'gunicorn',
     'dj_static',
+    'import_export',
 
 
 ]
