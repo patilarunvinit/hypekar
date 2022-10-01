@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'mycar',
     'feedback',
     'booking',
+    'gunicorn',
+    'dj_static',
 
 
 ]
