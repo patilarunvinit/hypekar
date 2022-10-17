@@ -22,7 +22,7 @@ def feedbackform(request):
             return JsonResponse(outdata.errors, safe=False)
 
     elif request.method == 'GET':
-        data = FeedBack.objects.all()
+        data = FeedBack.objects.all()[:6]
         output = FeedBackserializer(data, many=True)
         return JsonResponse(output.data, safe=False)
 
